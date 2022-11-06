@@ -29,7 +29,7 @@ actions.precombat+=/firestorm,if=talent.firestorm
 actions.precombat+=/living_flame,if=!talent.firestorm
 
 # Executed every time the actor is available.
-actions+=potion,if=buff.dragonrage.up&fight_remains<120|time>=300&fight_remains<35
+actions+=potion,if=buff.dragonrage.up|fight_remains<35
 actions+=/use_item,name=shadowed_orb_of_torment
 actions+=/use_item,name=crimson_gladiators_badge_of_ferocity,if=cooldown.dragonrage.remains>=55
 actions+=/use_items,if=buff.dragonrage.up
@@ -42,7 +42,7 @@ actions+=/run_action_list,name=aoe
 actions.st=dragonrage,if=cooldown.fire_breath.remains<=gcd.max&cooldown.eternity_surge.remains<2*gcd.max
 actions.st+=/run_action_list,name=fb,if=cooldown.fire_breath.up&(!talent.dragonrage|cooldown.dragonrage.remains>15)
 actions.st+=/eternity_surge,empower_to=1,if=!talent.dragonrage|cooldown.dragonrage.remains>15
-actions.st+=/living_flame,if=(buff.burnout.up|talent.ruby_embers&dot.living_flame_damage.remains<3&!prev.living_flame)&buff.essence_burst.stack<buff.essence_burst.max_stack
+actions.st+=/living_flame,if=(buff.burnout.up|talent.ruby_embers&dot.living_flame_damage.remains<4&!prev_gcd.1.living_flame)&buff.essence_burst.stack<buff.essence_burst.max_stack
 actions.st+=/shattering_star
 actions.st+=/firestorm,if=dot.fire_breath_damage.remains>3
 actions.st+=/disintegrate,chain=1,if=!talent.shattering_star|cooldown.shattering_star.remains>5|essence==essence.max|buff.essence_burst.stack==buff.essence_burst.max_stack
@@ -59,7 +59,7 @@ actions.dr+=/shattering_star,if=essence%3+buff.essence_burst.stack>=2
 actions.dr+=/pyre,if=buff.charged_blast.stack>16&spell_targets.pyre>1
 actions.dr+=/disintegrate,chain=1,if=prev_gcd.1.disintegrate&buff.burnout.stack<buff.burnout.max_stack|debuff.shattering_star_debuff.up
 actions.dr+=/firestorm,if=buff.snapfire.up
-actions.dr+=/living_flame,if=(buff.burnout.up|talent.ruby_embers&dot.living_flame_damage.remains<3&!prev.living_flame)&buff.essence_burst.stack<buff.essence_burst.max_stack
+actions.dr+=/living_flame,if=(buff.burnout.up|talent.ruby_embers&dot.living_flame_damage.remains<4&!prev_gcd.1.living_flame)&buff.essence_burst.stack<buff.essence_burst.max_stack
 actions.dr+=/disintegrate,chain=1,if=buff.essence_burst.stack==buff.essence_burst.max_stack
 actions.dr+=/living_flame,if=talent.everburning_flame
 actions.dr+=/azure_strike
