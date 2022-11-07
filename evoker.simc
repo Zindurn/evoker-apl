@@ -100,5 +100,5 @@ actions.fb+=/fire_breath,empower_to=4
 #eternity surge
 actions.es=eternity_surge,empower_to=1,if=spell_targets.pyre<=1+talent.eternitys_span
 actions.es+=/eternity_surge,empower_to=2,if=spell_targets.pyre<=2+2*talent.eternitys_span
-actions.es+=/eternity_surge,empower_to=3,if=spell_targets.pyre<=2+2*talent.eternitys_span|!talent.font_of_magic
+actions.es+=/eternity_surge,empower_to=3,if=spell_targets.pyre<=3+3*talent.eternitys_span|!talent.font_of_magic
 actions.es+=/eternity_surge,empower_to=4
