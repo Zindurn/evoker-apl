@@ -1,11 +1,3 @@
-# TODO
-# - improve TTS usage
-# - target thresholds
-# - recheck DR is extended properly
-# - optimize for no wasted proccs
-# - fix trinket usage
-# - decide on a baseline profile
-
 # we are channeling very often and a 0.25s baseline lag is just way too unrealistic, causing a huge loss in dps and potentially preventing DR extensions
 # might do some research in the future to find realistic values
 channel_lag=0.1
