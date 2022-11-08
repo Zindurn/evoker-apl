@@ -30,10 +30,9 @@ actions+=/run_action_list,name=dr_aoe,if=buff.dragonrage.up
 actions+=/run_action_list,name=aoe
 
 #single target
-actions.st=dragonrage,if=cooldown.fire_breath.remains<=gcd.max&cooldown.eternity_surge.remains<2*gcd.max
-actions.st+=/run_action_list,name=fb,if=cooldown.fire_breath.up&(!talent.dragonrage|cooldown.dragonrage.remains>15)
+actions.st=dragonrage,if=cooldown.fire_breath.remains<=gcd.max+(6*talent.causality)&cooldown.eternity_surge.remains<gcd.max
+actions.st+=/run_action_list,name=fb,if=cooldown.fire_breath.up&(!talent.dragonrage|cooldown.dragonrage.remains>10)
 actions.st+=/run_action_list,name=es,if=cooldown.eternity_surge.up&(!talent.dragonrage|cooldown.dragonrage.remains>15)
-actions.st+=/living_flame,if=(buff.burnout.up|talent.ruby_embers&dot.living_flame_damage.remains<4&!prev_gcd.1.living_flame)&buff.essence_burst.stack<buff.essence_burst.max_stack
 actions.st+=/shattering_star
 actions.st+=/pyre,if=(!talent.eternitys_span|!talent.scintillation)&buff.charged_blast.stack==20&spell_targets.pyre>1
 actions.st+=/firestorm,if=dot.fire_breath_damage.remains>3
