@@ -37,7 +37,7 @@ actions.st+=/shattering_star
 actions.st+=/pyre,if=(!talent.eternitys_span|!talent.scintillation)&buff.charged_blast.stack==20&spell_targets.pyre>1
 actions.st+=/firestorm,if=dot.fire_breath_damage.remains>3
 actions.st+=/living_flame,if=buff.burnout.stack==buff.burnout.max_stack&buff.essence_burst.stack<buff.essence_burst.max_stack
-actions.st+=/disintegrate,chain=1,if=!talent.shattering_star|cooldown.shattering_star.remains>5|essence==essence.max|buff.essence_burst.stack==buff.essence_burst.max_stack
+actions.st+=/disintegrate,chain=1,if=!talent.shattering_star|cooldown.shattering_star.remains>5|essence>essence.max-1|buff.essence_burst.stack==buff.essence_burst.max_stack
 actions.st+=/deep_breath,if=spell_targets.deep_breath>1
 actions.st+=/use_item,name=kharnalex_the_first_light
 actions.st+=/living_flame
@@ -48,11 +48,11 @@ actions.dr+=/eternity_surge,empower_to=1
 actions.dr+=/run_action_list,name=fb,if=cooldown.fire_breath.up
 actions.dr+=/living_flame,if=buff.dragonrage.remains<(buff.essence_burst.max_stack-buff.essence_burst.stack)*gcd.max&buff.burnout.up
 actions.dr+=/azure_strike,if=buff.dragonrage.remains<(buff.essence_burst.max_stack-buff.essence_burst.stack)*gcd.max
-actions.dr+=/shattering_star,if=essence%3+buff.essence_burst.stack>=2
+actions.dr+=/shattering_star,if=essence%3+buff.essence_burst.stack>=2.5
 actions.dr+=/pyre,if=buff.charged_blast.stack>16&spell_targets.pyre>1
 actions.dr+=/firestorm,if=buff.snapfire.up
-actions.dr+=/living_flame,if=(buff.burnout.up|talent.ruby_embers&dot.living_flame_damage.remains<4&!prev_gcd.1.living_flame)&buff.essence_burst.stack<buff.essence_burst.max_stack
-actions.dr+=/disintegrate,chain=1,interrupt_if=ticks>=2,interrupt_immediate=1,if=!talent.shattering_star|cooldown.shattering_star.remains>(buff.essence_burst.max_stack-buff.essence_burst.stack)*gcd.max|essence=essence.max|buff.essence_burst.stack==buff.essence_burst.max_stack
+actions.dr+=/living_flame,if=(buff.burnout.up|talent.ruby_embers&dot.living_flame_damage.remains<4&!prev_gcd.1.living_flame)&buff.essence_burst.stack<buff.essence_burst.max_stack&essence<essence.max-1
+actions.dr+=/disintegrate,chain=1,interrupt_if=ticks>=2,interrupt_immediate=1,if=!talent.shattering_star|cooldown.shattering_star.remains>(buff.essence_burst.max_stack-buff.essence_burst.stack)*gcd.max|essence>essence.max-1|buff.essence_burst.stack==buff.essence_burst.max_stack
 actions.dr+=/living_flame,if=talent.everburning_flame
 actions.dr+=/azure_strike
 
