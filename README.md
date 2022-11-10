@@ -2,10 +2,7 @@
 Useful description
 
 # Todo
-- [ ] improve TTS usage
-- [ ] target thresholds
 - [ ] recheck DR is extended properly
 - [ ] optimize for no wasted proccs
-- [ ] fix trinket usage
-- [ ] decide on a baseline profile
+- [ ] fix trinket usage (double on use / 1 minute?)
 - [ ] gather data on realistic channel lag
