@@ -4,6 +4,7 @@ channel_lag=0.1
 channel_lag_stddev=0.025
 
 # Executed before combat begins. Accepts non-harmful actions only.
+actions.precombat+=/variable,name=trinket_priority,op=setif,value=2,value_else=1,condition=trinket.2.has_use_buff&(!trinket.1.has_use_buff|trinket.1.cooldown.duration!=120&(trinket.2.cooldown.duration==120|trinket.2.cooldown.duration==60&trinket.1.cooldown.duration!=60))
 actions.precombat+=/flask
 actions.precombat+=/food
 actions.precombat+=/augmentation
@@ -14,9 +15,7 @@ actions.precombat+=/living_flame,if=!talent.firestorm
 
 # Executed every time the actor is available.
 actions+=potion,if=buff.dragonrage.up|fight_remains<35
-actions+=/use_item,name=shadowed_orb_of_torment
-actions+=/use_item,name=crimson_gladiators_badge_of_ferocity,if=cooldown.dragonrage.remains>=55
-actions+=/use_items,if=buff.dragonrage.up
+actions+=/call_action_list,name=trinkets
 actions+=/run_action_list,name=dr,if=buff.dragonrage.up&spell_targets.pyre<=2
 actions+=/run_action_list,name=st,if=spell_targets.pyre<=2
 actions+=/run_action_list,name=dr_aoe,if=buff.dragonrage.up
@@ -86,3 +85,6 @@ actions.es=eternity_surge,empower_to=1,if=spell_targets.pyre<=1+talent.eternitys
 actions.es+=/eternity_surge,empower_to=2,if=spell_targets.pyre<=2+2*talent.eternitys_span
 actions.es+=/eternity_surge,empower_to=3,if=spell_targets.pyre<=3+3*talent.eternitys_span|!talent.font_of_magic
 actions.es+=/eternity_surge,empower_to=4
+
+actions.trinkets+=/use_items,slots=trinket1,if=variable.trinket_priority==1&(buff.dragonrage.up|cooldown.dragonrage.remains>55)|variable.trinket_priority==2&cooldown.dragonrage.remains>20&!trinket.2.cooldown.up
+actions.trinkets+=/use_items,slots=trinket2,if=variable.trinket_priority==2&(buff.dragonrage.up|cooldown.dragonrage.remains>55)|variable.trinket_priority==1&cooldown.dragonrage.remains>20&!trinket.1.cooldown.up
