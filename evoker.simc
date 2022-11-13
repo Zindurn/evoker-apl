@@ -23,9 +23,9 @@ actions+=/run_action_list,name=dr_aoe,if=buff.dragonrage.up
 actions+=/run_action_list,name=aoe
 
 #single target
-actions.st=dragonrage,if=cooldown.fire_breath.remains<=gcd.max+(8*talent.causality)&cooldown.eternity_surge.remains<gcd.max|fight_remains<30
-actions.st+=/run_action_list,name=fb,if=cooldown.fire_breath.up&(!talent.dragonrage|cooldown.dragonrage.remains>10)
-actions.st+=/run_action_list,name=es,if=cooldown.eternity_surge.up&(!talent.dragonrage|cooldown.dragonrage.remains>15)
+actions.st=dragonrage,if=cooldown.fire_breath.remains<gcd.max&cooldown.eternity_surge.remains<2*gcd.max|fight_remains<30
+actions.st+=/call_action_list,name=fb,if=!talent.dragonrage|cooldown.dragonrage.remains>10
+actions.st+=/call_action_list,name=es,if=!talent.dragonrage|cooldown.dragonrage.remains>15
 actions.st+=/shattering_star
 actions.st+=/pyre,if=(talent.volatility|!talent.eternitys_span|!talent.scintillation)&buff.charged_blast.stack==20&spell_targets.pyre>1
 actions.st+=/firestorm,if=dot.fire_breath_damage.remains>3&debuff.shattering_star_debuff.down
@@ -36,12 +36,12 @@ actions.st+=/use_item,name=kharnalex_the_first_light,if=debuff.shattering_star_d
 actions.st+=/living_flame
 
 #dragonrage (single target)
-actions.dr=tip_the_scales
-actions.dr+=/eternity_surge,empower_to=1
-actions.dr+=/run_action_list,name=fb,if=cooldown.fire_breath.up
+actions.dr=tip_the_scales,if=!cooldown.fire_breath.up
+actions.dr+=/call_action_list,name=fb
+actions.dr+=/call_action_list,name=es
 actions.dr+=/living_flame,if=buff.dragonrage.remains<(buff.essence_burst.max_stack-buff.essence_burst.stack)*gcd.max&buff.burnout.up
 actions.dr+=/azure_strike,if=buff.dragonrage.remains<(buff.essence_burst.max_stack-buff.essence_burst.stack)*gcd.max
-actions.dr+=/shattering_star,if=essence%3+buff.essence_burst.stack>=2+0.5*talent.feed_the_flames
+actions.dr+=/shattering_star,if=essence%3+buff.essence_burst.stack>=2+0.5*talent.feed_the_flames|buff.bloodlust.down
 actions.dr+=/pyre,if=spell_targets.pyre>1&talent.volatility&buff.charged_blast.stack>16
 actions.dr+=/firestorm,if=buff.snapfire.up
 actions.dr+=/living_flame,if=(buff.burnout.up|talent.ruby_embers&dot.living_flame_damage.remains<4&!prev_gcd.1.living_flame)&buff.essence_burst.stack<buff.essence_burst.max_stack&essence<essence.max-1
@@ -51,8 +51,8 @@ actions.dr+=/azure_strike
 
 # aoe
 actions.aoe=dragonrage,if=cooldown.fire_breath.remains<=gcd.max&cooldown.eternity_surge.remains<2*gcd.max
-actions.aoe+=/run_action_list,name=es,if=cooldown.eternity_surge.up&(!talent.dragonrage|cooldown.dragonrage.remains>15)
-actions.aoe+=/run_action_list,name=fb,if=cooldown.fire_breath.up&(!talent.dragonrage|cooldown.dragonrage.remains>15)
+actions.aoe+=/call_action_list,name=es,if=!talent.dragonrage|cooldown.dragonrage.remains>15
+actions.aoe+=/call_action_list,name=fb,if=!talent.dragonrage|cooldown.dragonrage.remains>15
 actions.aoe+=/deep_breath
 actions.aoe+=/shattering_star
 actions.aoe+=/firestorm
@@ -64,8 +64,8 @@ actions.aoe+=/azure_strike
 
 #dragonrage (aoe)
 actions.dr_aoe=tip_the_scales,if=buff.dragonrage.remains<3&(cooldown.eternity_surge.up|cooldown.fire_breath.up)
-actions.dr_aoe+=/run_action_list,name=fb,if=cooldown.fire_breath.up
-actions.dr_aoe+=/run_action_list,name=es,if=cooldown.eternity_surge.up
+actions.dr_aoe+=/call_action_list,name=fb
+actions.dr_aoe+=/call_action_list,name=es
 actions.dr_aoe+=/azure_strike,if=buff.dragonrage.remains<(buff.essence_burst.max_stack-buff.essence_burst.stack)*gcd.max
 actions.dr_aoe+=/firestorm
 actions.dr_aoe+=/shattering_star
