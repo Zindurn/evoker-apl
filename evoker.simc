@@ -17,10 +17,9 @@ actions.precombat+=/living_flame,if=!talent.firestorm
 # Executed every time the actor is available.
 actions+=potion,if=buff.dragonrage.up|fight_remains<35
 actions+=/call_action_list,name=trinkets
-actions+=/run_action_list,name=dr,if=buff.dragonrage.up&spell_targets.pyre<=2
-actions+=/run_action_list,name=st,if=spell_targets.pyre<=2
-actions+=/run_action_list,name=dr_aoe,if=buff.dragonrage.up
-actions+=/run_action_list,name=aoe
+actions+=/run_action_list,name=aoe,if=spell_targets.pyre>=3
+actions+=/run_action_list,name=dr,if=buff.dragonrage.up
+actions+=/run_action_list,name=st
 
 #single target
 actions.st=dragonrage,if=cooldown.fire_breath.remains<gcd.max&cooldown.eternity_surge.remains<2*gcd.max|fight_remains<30
@@ -49,32 +48,21 @@ actions.dr+=/azure_strike,if=essence<3&!buff.essence_burst.up
 actions.dr+=/disintegrate,chain=1,interrupt_if=ticks>=2,interrupt_immediate=1,if=!talent.shattering_star|cooldown.shattering_star.remains>(buff.essence_burst.max_stack-buff.essence_burst.stack)*gcd.max|essence>essence.max-1|buff.essence_burst.stack==buff.essence_burst.max_stack
 actions.dr+=/azure_strike
 
-# aoe
-actions.aoe=dragonrage,if=cooldown.fire_breath.remains<=gcd.max&cooldown.eternity_surge.remains<2*gcd.max
-actions.aoe+=/call_action_list,name=es,if=!talent.dragonrage|cooldown.dragonrage.remains>15
-actions.aoe+=/call_action_list,name=fb,if=!talent.dragonrage|cooldown.dragonrage.remains>15
-actions.aoe+=/deep_breath
-actions.aoe+=/shattering_star
+#aoe
+actions.aoe+=/dragonrage,if=cooldown.fire_breath.remains<=gcd.max&cooldown.eternity_surge.remains<3*gcd.max
+actions.aoe+=/tip_the_scales,if=!cooldown.fire_breath.up&buff.dragonrage.up
+actions.aoe+=/call_action_list,name=fb,if=buff.dragonrage.up|!talent.dragonrage|cooldown.dragonrage.remains>10
+actions.aoe+=/call_action_list,name=es,if=buff.dragonrage.up|!talent.dragonrage|cooldown.dragonrage.remains>15
+actions.aoe+=/azure_strike,if=buff.dragonrage.up&buff.dragonrage.remains<(buff.essence_burst.max_stack-buff.essence_burst.stack)*gcd.max
+actions.aoe+=/deep_breath,if=!buff.dragonrage.up
 actions.aoe+=/firestorm
-actions.aoe+=/living_flame,if=essence<essence.max&buff.essence_burst.stack<buff.essence_burst.max_stack&buff.burnout.up&spell_targets.pyre<=3
+actions.aoe+=/shattering_star
+actions.aoe+=/living_flame,if=essence<essence.max&!buff.essence_burst.up&buff.burnout.up&buff.leaping_flames.up|buff.burnout.up&spell_targets.pyre<=3
+actions.aoe+=/pyre,if=talent.volatility
 actions.aoe+=/pyre,if=cooldown.dragonrage.remains>=10&spell_targets.pyre>=4
-actions.aoe+=/pyre,if=cooldown.dragonrage.remains>=8&spell_targets.pyre=3&buff.charged_blast.stack>=10
-actions.aoe+=/disintegrate,chain=1,if=!talent.shattering_star|cooldown.shattering_star.remains>5|essence==essence.max|buff.essence_burst.stack==buff.essence_burst.max_stack
+actions.aoe+=/pyre,if=cooldown.dragonrage.remains>=10&spell_targets.pyre=3&buff.charged_blast.stack>=10
+actions.aoe+=/disintegrate,chain=1,if=!talent.shattering_star|cooldown.shattering_star.remains>5|essence>essence.max-1|buff.essence_burst.stack==buff.essence_burst.max_stack
 actions.aoe+=/azure_strike
-
-#dragonrage (aoe)
-actions.dr_aoe=tip_the_scales,if=buff.dragonrage.remains<3&(cooldown.eternity_surge.up|cooldown.fire_breath.up)
-actions.dr_aoe+=/call_action_list,name=fb
-actions.dr_aoe+=/call_action_list,name=es
-actions.dr_aoe+=/azure_strike,if=buff.dragonrage.remains<(buff.essence_burst.max_stack-buff.essence_burst.stack)*gcd.max
-actions.dr_aoe+=/firestorm
-actions.dr_aoe+=/shattering_star
-actions.dr_aoe+=/living_flame,if=essence<essence.max&!buff.essence_burst.stack&buff.burnout.up&buff.leaping_flames.up
-actions.dr_aoe+=/pyre,if=talent.volatility
-actions.dr_aoe+=/pyre,if=cooldown.dragonrage.remains>=10&spell_targets.pyre>=4
-actions.dr_aoe+=/pyre,if=cooldown.dragonrage.remains>=10&spell_targets.pyre=3&buff.charged_blast.stack>=10
-actions.dr_aoe+=/disintegrate,chain=1,if=!talent.shattering_star|cooldown.shattering_star.remains>5|essence>essence.max-1|buff.essence_burst.stack==buff.essence_burst.max_stack
-actions.dr_aoe+=/azure_strike
 
 #firebreath
 actions.fb+=/fire_breath,empower_to=1,if=(20+2*talent.blast_furnace.rank)+dot.fire_breath_damage.remains<(20+2*talent.blast_furnace.rank)*1.3
