@@ -50,18 +50,26 @@ actions.dr+=/azure_strike
 
 #aoe
 actions.aoe+=/dragonrage,if=cooldown.fire_breath.remains<=gcd.max&cooldown.eternity_surge.remains<3*gcd.max
+actions.aoe+=/tip_the_scales,if=buff.dragonrage.up&spell_targets.pyre<=6
 actions.aoe+=/tip_the_scales,if=!cooldown.fire_breath.up&buff.dragonrage.up
+actions.aoe+=/call_action_list,name=fb,if=buff.dragonrage.up|!talent.dragonrage|cooldown.dragonrage.remains>10&talent.everburning_flame
+actions.aoe+=/fire_breath,empower_to=1,if=cooldown.dragonrage.remains>10&spell_targets.pyre<=10
+actions.aoe+=/fire_breath,empower_to=2,if=cooldown.dragonrage.remains>10&spell_targets.pyre<=8
+actions.aoe+=/fire_breath,empower_to=3,if=cooldown.dragonrage.remains>10&spell_targets.pyre<=4
+actions.aoe+=/fire_breath,empower_to=2,if=cooldown.dragonrage.remains>10
 actions.aoe+=/call_action_list,name=fb,if=buff.dragonrage.up|!talent.dragonrage|cooldown.dragonrage.remains>10
 actions.aoe+=/call_action_list,name=es,if=buff.dragonrage.up|!talent.dragonrage|cooldown.dragonrage.remains>15
 actions.aoe+=/azure_strike,if=buff.dragonrage.up&buff.dragonrage.remains<(buff.essence_burst.max_stack-buff.essence_burst.stack)*gcd.max
 actions.aoe+=/deep_breath,if=!buff.dragonrage.up
 actions.aoe+=/firestorm
 actions.aoe+=/shattering_star
-actions.aoe+=/living_flame,if=essence<essence.max&!buff.essence_burst.up&buff.burnout.up&buff.leaping_flames.up|buff.burnout.up&spell_targets.pyre<=3
+actions.aoe+=/azure_strike,if=cooldown.dragonrage.remains<gcd.max*6&cooldown.fire_breath.remains<6*gcd.max&cooldown.eternity_surge.remains<6*gcd.max
 actions.aoe+=/pyre,if=talent.volatility
+actions.aoe+=/living_flame,if=buff.burnout.up&buff.leaping_flames.up&!buff.essence_burst.up
 actions.aoe+=/pyre,if=cooldown.dragonrage.remains>=10&spell_targets.pyre>=4
 actions.aoe+=/pyre,if=cooldown.dragonrage.remains>=10&spell_targets.pyre=3&buff.charged_blast.stack>=10
 actions.aoe+=/disintegrate,chain=1,if=!talent.shattering_star|cooldown.shattering_star.remains>5|essence>essence.max-1|buff.essence_burst.stack==buff.essence_burst.max_stack
+actions.aoe+=/living_flame,if=talent.snapfire&buff.burnout.up
 actions.aoe+=/azure_strike
 
 #firebreath
