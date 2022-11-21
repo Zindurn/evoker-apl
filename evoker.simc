@@ -53,9 +53,10 @@ actions.aoe+=/dragonrage,if=cooldown.fire_breath.remains<=gcd.max&cooldown.etern
 actions.aoe+=/tip_the_scales,if=buff.dragonrage.up&spell_targets.pyre<=6
 actions.aoe+=/tip_the_scales,if=!cooldown.fire_breath.up&buff.dragonrage.up
 actions.aoe+=/call_action_list,name=fb,if=buff.dragonrage.up|!talent.dragonrage|cooldown.dragonrage.remains>10&talent.everburning_flame
-actions.aoe+=/fire_breath,empower_to=1,if=cooldown.dragonrage.remains>10&spell_targets.pyre<=10
-actions.aoe+=/fire_breath,empower_to=2,if=cooldown.dragonrage.remains>10&spell_targets.pyre<=8
-actions.aoe+=/fire_breath,empower_to=3,if=cooldown.dragonrage.remains>10&spell_targets.pyre<=4
+actions.aoe+=/fire_breath,empower_to=1,if=cooldown.dragonrage.remains>10&spell_targets.pyre>=10&fight_remains>20
+actions.aoe+=/fire_breath,empower_to=2,if=cooldown.dragonrage.remains>10&spell_targets.pyre>=5&fight_remains>15
+actions.aoe+=/fire_breath,empower_to=3,if=cooldown.dragonrage.remains>10&spell_targets.pyre=4&fight_remains>10
+actions.aoe+=/fire_breath,empower_to=4,if=cooldown.dragonrage.remains>10&fight_remains<10
 actions.aoe+=/fire_breath,empower_to=2,if=cooldown.dragonrage.remains>10
 actions.aoe+=/call_action_list,name=fb,if=buff.dragonrage.up|!talent.dragonrage|cooldown.dragonrage.remains>10
 actions.aoe+=/call_action_list,name=es,if=buff.dragonrage.up|!talent.dragonrage|cooldown.dragonrage.remains>15
